@@ -57,7 +57,6 @@ def check_valid_inputs(grid):
     return True
 
 
-# TODO: Modify this method to check for duplicates within a row and within a column and within a box
 # Validates Sudoku puzzle by checking if there are any duplicates within a row, column or within a box
 def check_duplicate(grid):
     # TODO: Check Duplicates in Rows and Columns
@@ -78,9 +77,45 @@ def check_duplicate(grid):
                 seen_column.add(grid[j][i])
 
     # TODO: Check for duplicates in boxes
+    # Check to see if box is valid
+    # Set x counter
+    x = 0
+    # Seen square set
+    seen_square = set()
+    for i in range(0, 3):
+        # Set/Reset y counter
+        y = 0
+
+        # Check sum of each box
+        for j in range(0, 3):
+            # Clear set
+            seen_square.clear()
+
+            seen_square.add(grid[x][y])
+            seen_square.add(grid[x + 1][y])
+            seen_square.add(grid[x + 2][y])
+            seen_square.add(grid[x][y + 1])
+            seen_square.add(grid[x + 1][y + 1])
+            seen_square.add(grid[x + 2][y + 1])
+            seen_square.add(grid[x][y + 2])
+            seen_square.add(grid[x + 1][y + 2])
+            seen_square.add(grid[x + 2][y + 2])
+
+            if len(seen_square) != 9:
+                print("Error: Box", i, j, "is invalid. Contains a duplicate")
+                return False
+
+            # Increment y counter
+            y = y + 3
+
+        # Increment the x counter
+        x = x + 3
 
     return True
 
+
+
+# TODO: Clean up this test arrays
 
 puzzle = [
     [8, 2, 7, 1, 5, 4, 3, 9, 6],
@@ -106,16 +141,15 @@ deviant = [
     [7, 7, 7, 8, 8, 8, 9, 9, 9]
 ]
 
-# checkBox(puzzle)
+deviant_2 = [
+    [8, 2, 7, 1, 5, 4, 3, 9, 6],
+    [9, 6, 5, 3, 2, 7, 1, 4, 8],
+    [3, 4, 1, 6, 8, 9, 7, 5, 2],
+    [5, 9, 3, 4, 6, 8, 2, 7, 1],
+    [4, 7, 2, 5, 1, 3, 6, 8, 9],
+    [6, 1, 8, 9, 7, 2, 4, 3, 5],
+    [7, 8, 6, 2, 3, 5, 9, 1, 4],
+    [1, 5, 4, 7, 9, 6, 8, 2, 3],
+    [2, 3, 9, 8, 4, 1, 5, 6, 7]
+]
 
-# check_sum(deviant)
-
-print(check_valid_inputs(deviant))
-
-# Check for duplicates in row
-arrayClean = [8, 2, 7, 1, 5, 4, 3, 9, 6]
-arrayDirty = [8, 2, 7, 1, 5, 4, 3, 7, 6]
-
-
-
-check_duplicate(puzzle)
