@@ -2,6 +2,8 @@ import numpy as np
 
 
 # TODO: Put everything together (or encapsulate or whatever) it into a well defined class structure
+# TODO: Clean up print statements in methods
+# TODO: Write unit tests for methods
 
 # Validates Sudoku puzzle by checking if sums of each of the rows, columns, and boxes is equal to 45
 def check_sum(grid):
@@ -114,6 +116,16 @@ def check_duplicate(grid):
     return True
 
 
+def check_grid(grid):
+    if not check_sum(grid):
+        return False
+    if not check_valid_inputs(grid):
+        return False
+    if not check_duplicate(grid):
+        return False
+    return True
+
+
 
 # TODO: Clean up this test arrays
 
@@ -153,3 +165,4 @@ deviant_2 = [
     [2, 3, 9, 8, 4, 1, 5, 6, 7]
 ]
 
+print(check_grid(deviant))
