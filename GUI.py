@@ -16,11 +16,19 @@ running = True
 while running:
     # Gets all events
     for event in pygame.event.get():
+
+        # Quit sudoku game
         if event.type == pygame.QUIT:
             running = False
+
+        # if event.type == pygame.
+
+
 
     # RGB - Red, Green, Blue
     screen.fill((255, 255, 255))
     pygame.display.update()
+
+    # if event.type.
 
 # HANG THE PROGRAM
