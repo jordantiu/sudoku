@@ -1,7 +1,6 @@
 import numpy as np
 import random
-
-from validate import check_grid
+import validate
 
 grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -78,4 +77,4 @@ fill()
 
 print(np.matrix(grid))
 
-print(check_grid(grid))
+print(validate.check_grid(grid))
