@@ -12,16 +12,12 @@ def check_sum(grid):
         if sum(grid[i]) != 45:
             print("Error: Row", i, "is invalid.")
             return False
-        else:
-            print("Row", i, "is valid with sum of 45.")
 
         # Validate column Sum
         if grid[0][i] + grid[1][i] + grid[2][i] + grid[3][i] + grid[4][i] + grid[5][i] + grid[6][i] + grid[7][i] + \
                 grid[8][i] != 45:
             print("Error: Column", i, "is invalid.")
             return False
-        else:
-            print("Column", i, "is valid with sum of 45.")
 
     # Check to see if box is valid
     # Set x counter
@@ -38,8 +34,6 @@ def check_sum(grid):
                     grid[x][y + 2] + grid[x + 1][y + 2] + grid[x + 2][y + 2] != 45:
                 print("Error: Box", i, j, "is invalid.")
                 return False
-            else:
-                print("Box", i, j, "has valid sum of 45")
 
             # Increment y counter
             y = y + 3

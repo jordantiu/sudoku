@@ -3,124 +3,79 @@ import random
 
 from validate import check_grid
 
-puzzle = [
-    [8, 2, 7, 1, 5, 4, 3, 9, 6],
-    [9, 6, 5, 3, 2, 7, 1, 4, 8],
-    [3, 4, 1, 6, 8, 9, 7, 5, 2],
-    [5, 9, 3, 4, 6, 8, 2, 7, 1],
-    [4, 7, 2, 5, 1, 3, 6, 8, 9],
-    [6, 1, 8, 9, 7, 2, 4, 3, 5],
-    [7, 8, 6, 2, 3, 5, 9, 1, 4],
-    [1, 5, 4, 7, 9, 6, 8, 2, 3],
-    [2, 3, 9, 8, 4, 1, 5, 6, 7]
+grid = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
 
-# NOTE: CAN SWAP ROWS AND COLUMNS WHEN INSIDE THE CONFIDES OF THEIR RESPECTIVE BOXES
-# (depending on if it is row or column)
+def check_valid(y, x, number):
+    global grid
 
-# TODO: COMPLETED: Row Swap function
-# TODO: Add column swap to master swap function
+    # Check if row is valid
+    for i in range(0, 9):
+        if grid[y][i] == number:
+            return False
 
-def swap(grid):
-    # Change the number of potential iterations here
-    random_iteration = random.randint(25, 50)
+    # Check if column is valid
+    for i in range(0, 9):
+        if grid[i][x] == number:
+            return False
 
-    for i in range(0, random_iteration):
-        row_swap_key = random.randint(0, 8)
-        column_swap_key = random.randint(0, 8)
+    # Floor division to determine which Sudoko box we are in
+    box_x = (x // 3) * 3
+    box_y = (y // 3) * 3
 
-        # Swap a random row
-        # Swap Rows 0 and 1
-        if row_swap_key == 0:
-            grid[0], grid[1] = grid[1], grid[0]
-        # Swap Rows 0 and 2
-        elif row_swap_key == 1:
-            grid[0], grid[2] = grid[2], grid[0]
-        # Swap Rows 1 and 2
-        elif row_swap_key == 2:
-            grid[0], grid[1] = grid[1], grid[0]
-        # Swap Rows 3 and 4
-        elif row_swap_key == 3:
-            grid[3], grid[4] = grid[4], grid[3]
-        # Swap Rows 3 and 5
-        elif row_swap_key == 4:
-            grid[3], grid[5] = grid[5], grid[3]
-        # Swap Rows 4 and 5
-        elif row_swap_key == 5:
-            grid[4], grid[5] = grid[5], grid[4]
-        # Swap Rows 6 and 7
-        elif row_swap_key == 6:
-            grid[6], grid[7] = grid[7], grid[6]
-        # Swap Rows 6 and 8
-        elif row_swap_key == 7:
-            grid[6], grid[8] = grid[8], grid[6]
-        # Swap Rows 7 and 8
-        elif row_swap_key == 8:
-            grid[7], grid[8] = grid[8], grid[7]
+    # Check to see if box is valid
+    for i in range(0, 3):
+        for j in range(0, 3):
+            if grid[box_y + i][box_x + j] == number:
+                return False
 
-        # Swap a random column
-        # TODO: Add your column swap function here
-        # Swap Columns 0 and 1
-        if column_swap_key == 0:
-            print("Add your functions in between")
-        # Swap Columns 0 and 2
-        if column_swap_key == 1:
-            print("Add your functions in between")
-        # Swap Columns 1 and 2
-        if column_swap_key == 2:
-            print("Add your functions in between")
-        # Swap Columns 3 and 4
-        if column_swap_key == 3:
-            print("Add your functions in between")
-        # Swap Columns 3 and 5
-        if column_swap_key == 4:
-            print("Add your functions in between")
-        # Swap Columns 4 and 5
-        if column_swap_key == 5:
-            print("Add your functions in between")
-        # Swap Columns 6 and 7
-        if column_swap_key == 6:
-            print("Add your functions in between")
-        # Swap Columns 6 and 8
-        if column_swap_key == 7:
-            print("Add your functions in between")
-        # Swap Columns 7 and 8
-        if column_swap_key == 0:
-            print("Add your functions in between")
+    # Return True if row, column, and box checks pass
+    return True
 
 
+def fill():
+    global grid
 
-    print(np.matrix(grid))
-    print(check_grid(grid))
+    for y in range(0, 9):
+        for x in range(0, 9):
+            # Check if the grid is empty with '0'
+            if grid[y][x] == 0:
+                # For number choices between 1 and 9
+                for z in range(1, 9):
+                    choices_left = {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
+                    n = random.choice(tuple(choices_left))
+                    choices_left.remove(n)
 
-# TODO: Build a preliminary column swap function then merge it into the master swap function
-def swap_columns(grid):
-    random_iteration = random.randint(0, 50)
+                    # if valid
+                    if check_valid(y, x, n):
+                        grid[y][x] = n
 
-    for i in range(0, random_iteration):
-        random_swap_key = random.randint(0, 8)
+                        # Recursive call to find next empty square
+                        fill()
 
-        # Swap Columns 0 and 1
-        print("Add your functions in between")
-        # Swap Columns 0 and 2
-        # Swap Columns 1 and 2
+                        # End random grid generation
+                        if grid[8][8] != 0:
+                            return
 
-        # Swap Columns 3 and 4
-        # Swap Columns 3 and 5
-        # Swap Columns 4 and 5
+                        # Revert number to zero when backtracking
+                        grid[y][x] = 0
 
-        # Swap Columns 6 and 7
-        # Swap Columns 6 and 8
-        # Swap Columns 7 and 8
-
-def master_swap_function(grid):
-    # TODO: Have your row and column swaps interchange
-    print("ADD HERE")
-
-# print(np.matrix(grid))
-# print(check_grid(grid))
+                return
 
 
-swap_row(puzzle)
+fill()
+
+print(np.matrix(grid))
+
+print(check_grid(grid))
