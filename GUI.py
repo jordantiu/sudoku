@@ -1,9 +1,24 @@
 import pygame
 
+# TODO: Delete numpy when finished with testing
+import numpy as np
+
 # TODO: References
 # https://pythonprogramming.net/pygame-start-menu-tutorial/?completed=/pygame-drawing-shapes-objects/
 # https://www.youtube.com/watch?v=jh_m-Eytq0Q&list=PLQVvvaa0QuDdLkP8MrOXLe_rKuf6r80KO&index=11&ab_channel=sentdex
 
+# Blank Grid
+grid = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
 
 pygame.init()
 
@@ -179,7 +194,7 @@ def start_sudoku():
 
         # TODO: Current position function
         pygame.draw.rect(screen, light_blue,
-                         (x * square_size + square_size, y * square_size + square_size, square_size, square_size))
+                         (y * square_size + square_size, x * square_size + square_size, square_size, square_size))
 
         # Gets all events
         for event in pygame.event.get():
@@ -188,26 +203,69 @@ def start_sudoku():
             if event.type == pygame.QUIT:
                 quit()
 
-            # If click
+            # TODO: If click (Maybe do something where we get the mouse coordinates and do a sort of floor division?)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pass
 
             # Arrow key movements
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT and x > 0:
-                    x = x - 1
-                    print(x, y)
-                if event.key == pygame.K_RIGHT and x < 8:
-                    x = x + 1
-                    print(x, y)
-                if event.key == pygame.K_DOWN and y < 8:
-                    y = y + 1
-                    print(x, y)
-                if event.key == pygame.K_UP and y > 0:
+                if event.key == pygame.K_LEFT and y > 0:
                     y = y - 1
                     print(x, y)
+                if event.key == pygame.K_RIGHT and y < 8:
+                    y = y + 1
+                    print(x, y)
+                if event.key == pygame.K_DOWN and x < 8:
+                    x = x + 1
+                    print(x, y)
+                if event.key == pygame.K_UP and x > 0:
+                    x = x - 1
+                    print(x, y)
 
-            # TODO: Number input
+            # TODO: Number input CONTINUE 10.05.2020
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_0 or event.key == pygame.K_KP0:
+                    grid[x][y] = 0
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_1 or event.key == pygame.K_KP1:
+                    grid[x][y] = 1
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_2 or event.key == pygame.K_KP2:
+                    grid[x][y] = 2
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_3 or event.key == pygame.K_KP3:
+                    grid[x][y] = 3
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_4 or event.key == pygame.K_KP4:
+                    grid[x][y] = 4
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_5 or event.key == pygame.K_KP5:
+                    grid[x][y] = 5
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_6 or event.key == pygame.K_KP6:
+                    grid[x][y] = 6
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_7 or event.key == pygame.K_KP7:
+                    grid[x][y] = 7
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_8 or event.key == pygame.K_KP8:
+                    grid[x][y] = 8
+                    print(np.matrix(grid))
+                    continue
+                if event.key == pygame.K_9 or event.key == pygame.K_KP9:
+                    grid[x][y] = 9
+                    print(np.matrix(grid))
+                    continue
+
 
             # TODO: Backspace to undo number
 
