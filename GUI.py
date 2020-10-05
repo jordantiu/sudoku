@@ -30,6 +30,9 @@ bright_green = (0, 255, 0)
 gray = (192, 192, 192)
 light_blue = (193, 225, 236)
 
+# Clock
+clock = pygame.time.Clock()
+
 
 def button(text, x_coordinate, y_coordinate, button_width, button_height, color, hover_color, action=None):
     # Mouse Position
@@ -119,17 +122,23 @@ def draw_board():
             # Add buffer to board
             if row == 0:
                 continue
-            pygame.draw.rect(screen, black, (column * square_size, row * square_size, square_size, square_size), 1)
+            pygame.draw.rect(screen, light_blue, (column * square_size, row * square_size, square_size, square_size), 1)
 
 
 # Draws borders in between sudoku boxes
 def draw_border():
-    pygame.draw.rect(screen, black, (square_size, square_size + square_size * 3, square_size * 9, square_size * 3), 5)
-    pygame.draw.rect(screen, black, (square_size + square_size * 3, square_size, square_size * 3, square_size * 9), 5)
-    pygame.draw.rect(screen, black, (square_size, square_size, square_size * 9, square_size * 9), 5)
+    pygame.draw.rect(screen, black, (square_size, square_size + square_size * 3, square_size * 9, square_size * 3), 1)
+    pygame.draw.rect(screen, black, (square_size + square_size * 3, square_size, square_size * 3, square_size * 9), 1)
+    pygame.draw.rect(screen, black, (square_size, square_size, square_size * 9, square_size * 9), 1)
 
 
-def cube(text, x_coordinate, y_coordinate, button_width, button_height, color, hover_color):
+# TODO: Cube function 10.04.2020
+def cube(x, y):
+    if x < 0 or y < 0 or x > 8 or y > 8:
+        return x, y
+
+
+def dummy(text, x_coordinate, y_coordinate, button_width, button_height, color, hover_color):
     # Mouse Position
     mouse = pygame.mouse.get_pos()
     print(mouse)
@@ -154,8 +163,11 @@ def cube(text, x_coordinate, y_coordinate, button_width, button_height, color, h
 def start_sudoku():
     sudoku = True
 
-    while sudoku:
+    # Position coordinates (x,y)
+    x = 0
+    y = 0
 
+    while sudoku:
         # Background screen color
         screen.fill(white)
 
@@ -164,6 +176,10 @@ def start_sudoku():
 
         # Draw borders for sudoku board
         draw_border()
+
+        # TODO: Current position function
+        pygame.draw.rect(screen, light_blue,
+                         (x * square_size + square_size, y * square_size + square_size, square_size, square_size))
 
         # Gets all events
         for event in pygame.event.get():
@@ -176,7 +192,20 @@ def start_sudoku():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pass
 
-            # TODO: Arrow key movements
+            # Arrow key movements
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT and x > 0:
+                    x = x - 1
+                    print(x, y)
+                if event.key == pygame.K_RIGHT and x < 8:
+                    x = x + 1
+                    print(x, y)
+                if event.key == pygame.K_DOWN and y < 8:
+                    y = y + 1
+                    print(x, y)
+                if event.key == pygame.K_UP and y > 0:
+                    y = y - 1
+                    print(x, y)
 
             # TODO: Number input
 
@@ -186,6 +215,8 @@ def start_sudoku():
 
         # Update screen
         pygame.display.update()
+
+        clock.tick(60)
 
 
 def exit_game():
