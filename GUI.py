@@ -147,12 +147,6 @@ def draw_border():
     pygame.draw.rect(screen, black, (square_size, square_size, square_size * 9, square_size * 9), 1)
 
 
-# TODO: Cube function 10.04.2020
-def cube(x, y):
-    if x < 0 or y < 0 or x > 8 or y > 8:
-        return x, y
-
-
 def dummy(text, x_coordinate, y_coordinate, button_width, button_height, color, hover_color):
     # Mouse Position
     mouse = pygame.mouse.get_pos()
@@ -189,12 +183,12 @@ def start_sudoku():
         # Draw the sudoku game board
         draw_board()
 
-        # Draw borders for sudoku board
-        draw_border()
-
         # TODO: Current position function
         pygame.draw.rect(screen, light_blue,
                          (y * square_size + square_size, x * square_size + square_size, square_size, square_size))
+
+        # Draw borders for sudoku board
+        draw_border()
 
         # Gets all events
         for event in pygame.event.get():
@@ -211,65 +205,64 @@ def start_sudoku():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT and y > 0:
                     y = y - 1
-                    print(x, y)
                 if event.key == pygame.K_RIGHT and y < 8:
                     y = y + 1
-                    print(x, y)
                 if event.key == pygame.K_DOWN and x < 8:
                     x = x + 1
-                    print(x, y)
                 if event.key == pygame.K_UP and x > 0:
                     x = x - 1
-                    print(x, y)
 
             # TODO: Number input CONTINUE 10.05.2020
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_0 or event.key == pygame.K_KP0:
+                if event.key == pygame.K_0 or event.key == pygame.K_KP0 or event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
                     grid[x][y] = 0
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_1 or event.key == pygame.K_KP1:
+                elif event.key == pygame.K_1 or event.key == pygame.K_KP1:
                     grid[x][y] = 1
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_2 or event.key == pygame.K_KP2:
+                elif event.key == pygame.K_2 or event.key == pygame.K_KP2:
                     grid[x][y] = 2
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_3 or event.key == pygame.K_KP3:
+                elif event.key == pygame.K_3 or event.key == pygame.K_KP3:
                     grid[x][y] = 3
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_4 or event.key == pygame.K_KP4:
+                elif event.key == pygame.K_4 or event.key == pygame.K_KP4:
                     grid[x][y] = 4
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_5 or event.key == pygame.K_KP5:
+                elif event.key == pygame.K_5 or event.key == pygame.K_KP5:
                     grid[x][y] = 5
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_6 or event.key == pygame.K_KP6:
+                elif event.key == pygame.K_6 or event.key == pygame.K_KP6:
                     grid[x][y] = 6
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_7 or event.key == pygame.K_KP7:
+                elif event.key == pygame.K_7 or event.key == pygame.K_KP7:
                     grid[x][y] = 7
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_8 or event.key == pygame.K_KP8:
+                elif event.key == pygame.K_8 or event.key == pygame.K_KP8:
                     grid[x][y] = 8
-                    print(np.matrix(grid))
-                    continue
-                if event.key == pygame.K_9 or event.key == pygame.K_KP9:
+                elif event.key == pygame.K_9 or event.key == pygame.K_KP9:
                     grid[x][y] = 9
+
+                # Print grid for testing when g is pressed
+                elif event.key == pygame.K_g:
                     print(np.matrix(grid))
+
+        # Display numbers of the grid
+        cube_text = pygame.font.Font('freesansbold.ttf', 35)
+        for i in range(0, 9):
+            for j in range(0, 9):
+                # Make cube blank if '0'
+                if grid[j][i] == 0:
                     continue
 
+                text_surf, text_rect = text_objects(str(grid[j][i]), cube_text)
+                text_rect.center = (75 + i * 50, 80 + j * 50)
+                screen.blit(text_surf, text_rect)
 
-            # TODO: Backspace to undo number
-
-        # cube("2", 350, 350, 100, 50, white, light_blue)
+        # text_surf, text_rect = text_objects(str(grid[0][0]), cube_text)
+        # text_rect.center = (75, 80)
+        # screen.blit(text_surf, text_rect)
+        #
+        # text_surf, text_rect = text_objects(str(grid[0][1]), cube_text)
+        # text_rect.center = (125, 80)
+        # screen.blit(text_surf, text_rect)
+        #
+        # text_surf, text_rect = text_objects(str(grid[1][0]), cube_text)
+        # text_rect.center = (75, 130)
+        # screen.blit(text_surf, text_rect)
 
         # Update screen
         pygame.display.update()
