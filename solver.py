@@ -59,7 +59,7 @@ def check_valid(y, x, number, grid):
     return True
 
 
-# CHeck to see if grid is solved
+# Check to see if grid is solved
 def completed(grid):
     count = 0
 
