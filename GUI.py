@@ -1,6 +1,9 @@
 import pygame
 
-# TODO: Delete numpy when finished with testing
+import generator
+import validate
+import solver
+
 import numpy as np
 
 # TODO: References
@@ -8,24 +11,36 @@ import numpy as np
 # https://www.youtube.com/watch?v=jh_m-Eytq0Q&list=PLQVvvaa0QuDdLkP8MrOXLe_rKuf6r80KO&index=11&ab_channel=sentdex
 
 # Blank Grid
+# grid = [
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
+#     [0, 0, 0, 0, 0, 0, 0, 0, 0]
+# ]
+
 grid = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [7, 8, 0, 4, 0, 0, 1, 2, 0],
+    [6, 0, 0, 0, 7, 5, 0, 0, 9],
+    [0, 0, 0, 6, 0, 1, 0, 7, 8],
+    [0, 0, 7, 0, 4, 0, 2, 6, 0],
+    [0, 0, 1, 0, 5, 0, 9, 3, 0],
+    [9, 0, 4, 0, 6, 0, 0, 0, 5],
+    [0, 7, 0, 3, 0, 0, 0, 1, 2],
+    [1, 2, 0, 0, 0, 7, 4, 0, 0],
+    [0, 4, 9, 2, 0, 6, 0, 0, 7],
 ]
 
 pygame.init()
 
 # Init pygame
-display_width = 800
+display_width = 750
 
-display_height = 570
+display_height = 550
 screen = pygame.display.set_mode((display_width, display_height))
 
 # Create screen with pixel length x height of 800 x 600
@@ -73,11 +88,34 @@ def button(text, x_coordinate, y_coordinate, button_width, button_height, color,
     text_rect.center = ((x_coordinate + (button_width / 2)), (y_coordinate + (button_height / 2)))
     screen.blit(text_surf, text_rect)
 
+    # Add black border to button
+    pygame.draw.rect(screen, black, (x_coordinate, y_coordinate, button_width, button_height), 2)
+
 
 def text_objects(text, font):
     text_surface = font.render(text, True, black)
 
     return text_surface, text_surface.get_rect()
+
+
+# Draws individual sudoku squares
+def draw_board():
+    for column in range(column_count + 1):
+        # Add buffer to board
+        if column == 0:
+            continue
+        for row in range(row_count + 1):
+            # Add buffer to board
+            if row == 0:
+                continue
+            pygame.draw.rect(screen, gray, (column * square_size, row * square_size, square_size, square_size), 1)
+
+
+# Draws borders in between sudoku boxes
+def draw_border():
+    pygame.draw.rect(screen, black, (square_size, square_size + square_size * 3, square_size * 9, square_size * 3), 2)
+    pygame.draw.rect(screen, black, (square_size + square_size * 3, square_size, square_size * 3, square_size * 9), 2)
+    pygame.draw.rect(screen, black, (square_size, square_size, square_size * 9, square_size * 9), 2)
 
 
 # Open Game Menu
@@ -113,7 +151,7 @@ def main_menu():
         pygame.display.update()
 
 
-# TODO: Current work position 10.04.2020
+# TODO: Current work position 10.07.2020
 # https://www.youtube.com/watch?v=XpYz-q1lxu8&feature=emb_title
 # Sudoku game
 
@@ -127,48 +165,6 @@ board_width = column_count * square_size
 height = row_count * square_size
 
 
-# Draws individual sudoku squares
-def draw_board():
-    for column in range(column_count + 1):
-        # Add buffer to board
-        if column == 0:
-            continue
-        for row in range(row_count + 1):
-            # Add buffer to board
-            if row == 0:
-                continue
-            pygame.draw.rect(screen, light_blue, (column * square_size, row * square_size, square_size, square_size), 1)
-
-
-# Draws borders in between sudoku boxes
-def draw_border():
-    pygame.draw.rect(screen, black, (square_size, square_size + square_size * 3, square_size * 9, square_size * 3), 1)
-    pygame.draw.rect(screen, black, (square_size + square_size * 3, square_size, square_size * 3, square_size * 9), 1)
-    pygame.draw.rect(screen, black, (square_size, square_size, square_size * 9, square_size * 9), 1)
-
-
-def dummy(text, x_coordinate, y_coordinate, button_width, button_height, color, hover_color):
-    # Mouse Position
-    mouse = pygame.mouse.get_pos()
-    print(mouse)
-    click = pygame.mouse.get_pressed()
-    print(click)
-
-    # Note: mouse[0] is x coordinate of mouse; mouse[1] is y coordinate
-    # Button Hover
-    if x_coordinate < mouse[0] < x_coordinate + button_width and y_coordinate < mouse[1] < y_coordinate + button_height:
-        pygame.draw.rect(screen, hover_color, (x_coordinate, y_coordinate, button_width, button_height))
-
-    else:
-        pygame.draw.rect(screen, color, (x_coordinate, y_coordinate, button_width, button_height))
-
-    # Button Text
-    button_text = pygame.font.Font("freesansbold.ttf", 20)
-    text_surf, text_rect = text_objects(text, button_text)
-    text_rect.center = ((x_coordinate + (button_width / 2)), (y_coordinate + (button_height / 2)))
-    screen.blit(text_surf, text_rect)
-
-
 def start_sudoku():
     sudoku = True
 
@@ -177,18 +173,27 @@ def start_sudoku():
     y = 0
 
     while sudoku:
+
+        # Mouse position
+        mouse = pygame.mouse.get_pos()
+        print(mouse)
+
         # Background screen color
         screen.fill(white)
+
+        # Highlight current position on board
+        pygame.draw.rect(screen, light_blue,
+                         (y * square_size + square_size, x * square_size + square_size, square_size, square_size))
 
         # Draw the sudoku game board
         draw_board()
 
-        # TODO: Current position function
-        pygame.draw.rect(screen, light_blue,
-                         (y * square_size + square_size, x * square_size + square_size, square_size, square_size))
-
         # Draw borders for sudoku board
         draw_border()
+
+        # TODO: Menu buttons
+        button("Exit", 550, 150, 150, 50, red, white, exit_game)
+        button("New Game", 550, 50, 150, 50, green, white)
 
         # Gets all events
         for event in pygame.event.get():
@@ -197,9 +202,17 @@ def start_sudoku():
             if event.type == pygame.QUIT:
                 quit()
 
-            # TODO: If click (Maybe do something where we get the mouse coordinates and do a sort of floor division?)
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                pass
+            # Generate new sudoku board on button click (unable to hold button)
+            if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 50 < mouse[1] < 100:
+                new_game()
+
+            # Click to change highlighted position
+            for i in range(0, 9):
+                for j in range(0, 9):
+                    if event.type == pygame.MOUSEBUTTONDOWN and 50 + 50 * j < mouse[0] < 100 + 50 * j and 50 + 50 * i < \
+                            mouse[1] < 100 + i * 50:
+                        x = i
+                        y = j
 
             # Arrow key movements
             if event.type == pygame.KEYDOWN:
@@ -212,8 +225,7 @@ def start_sudoku():
                 if event.key == pygame.K_UP and x > 0:
                     x = x - 1
 
-            # TODO: Number input CONTINUE 10.05.2020
-
+            # Number inputs
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_0 or event.key == pygame.K_KP0 or event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
                     grid[x][y] = 0
@@ -236,9 +248,15 @@ def start_sudoku():
                 elif event.key == pygame.K_9 or event.key == pygame.K_KP9:
                     grid[x][y] = 9
 
-                # Print grid for testing when g is pressed
+                # TODO: Delete Test Keys when completed with project (below)
                 elif event.key == pygame.K_g:
                     print(np.matrix(grid))
+                elif event.key == pygame.K_SPACE:
+                    generator.fill(grid)
+                elif event.key == pygame.K_n:
+                    for i in range(0, 9):
+                        for j in range(0, 9):
+                            grid[i][j] = 0
 
         # Display numbers of the grid
         cube_text = pygame.font.Font('freesansbold.ttf', 35)
@@ -264,6 +282,8 @@ def start_sudoku():
         # text_rect.center = (75, 130)
         # screen.blit(text_surf, text_rect)
 
+        # TODO: Fix solver to receive input and return output
+
         # Update screen
         pygame.display.update()
 
@@ -273,6 +293,15 @@ def start_sudoku():
 def exit_game():
     pygame.quit()
     quit()
+
+
+# TODO: Adjust to create a new puzzle (when fucntion is built)
+# TODO: Fix the infinite click issue
+def new_game():
+    for i in range(0, 9):
+        for j in range(0, 9):
+            grid[i][j] = 0
+    generator.fill(grid)
 
 
 main_menu()
