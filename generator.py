@@ -1,8 +1,9 @@
 import numpy as np
 import random
 import validate
+import solver
 
-grid = [
+blank = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -15,9 +16,7 @@ grid = [
 ]
 
 
-def check_valid(y, x, number):
-    global grid
-
+def check_valid(y, x, number, grid):
     # Check if row is valid
     for i in range(0, 9):
         if grid[y][i] == number:
@@ -42,9 +41,7 @@ def check_valid(y, x, number):
     return True
 
 
-def fill():
-    global grid
-
+def fill(grid):
     for y in range(0, 9):
         for x in range(0, 9):
             # Check if the grid is empty with '0'
@@ -57,11 +54,11 @@ def fill():
                     choices_left.remove(n)
 
                     # if valid
-                    if check_valid(y, x, n):
+                    if check_valid(y, x, n, grid):
                         grid[y][x] = n
 
                         # Recursive call to find next empty square
-                        fill()
+                        fill(grid)
 
                         # End random grid generation
                         if grid[8][8] != 0:
@@ -71,10 +68,22 @@ def fill():
                         grid[y][x] = 0
 
                 return
+    return grid
 
 
-fill()
+# TODO: Write ability to generate blanks on a generated sudoku grid
+# TODO: MAKE SURE YOU HAVE THE ALREADY SOLVED PUZZLE STORED (possibly needed or not?)
+def add_blanks(grid):
+    grid[2][2] = 0
+    return grid
 
-print(np.matrix(grid))
 
-print(validate.check_grid(grid))
+print(np.matrix(blank))
+
+fill(blank)
+
+print(np.matrix(blank))
+
+add_blanks(blank)
+
+print(np.matrix(blank))
