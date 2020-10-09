@@ -11,39 +11,70 @@ import numpy as np
 # https://www.youtube.com/watch?v=jh_m-Eytq0Q&list=PLQVvvaa0QuDdLkP8MrOXLe_rKuf6r80KO&index=11&ab_channel=sentdex
 
 # Blank Grid
-# grid = [
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-#     [0, 0, 0, 0, 0, 0, 0, 0, 0]
-# ]
-
 grid = [
-    [7, 8, 0, 4, 0, 0, 1, 2, 0],
-    [6, 0, 0, 0, 7, 5, 0, 0, 9],
-    [0, 0, 0, 6, 0, 1, 0, 7, 8],
-    [0, 0, 7, 0, 4, 0, 2, 6, 0],
-    [0, 0, 1, 0, 5, 0, 9, 3, 0],
-    [9, 0, 4, 0, 6, 0, 0, 0, 5],
-    [0, 7, 0, 3, 0, 0, 0, 1, 2],
-    [1, 2, 0, 0, 0, 7, 4, 0, 0],
-    [0, 4, 9, 2, 0, 6, 0, 0, 7],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-pygame.init()
+# Answer grid
+answer = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+# Lock ability to change numbers
+lock = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
+# Initial fill grid
+generator.fill(grid)
+
+# Copy answer grid
+for i in range(0, 9):
+    for j in range(0, 9):
+        answer[i][j] = grid[i][j]
+
+# Add blanks to puzzle
+generator.add_blanks(grid)
+
+# Record locked numbers
+for i in range(0, 9):
+    for j in range(0, 9):
+        if grid[i][j] != 0:
+            lock[i][j] = True
 
 # Init pygame
-display_width = 750
+pygame.init()
 
+# Display dimensions
+display_width = 750
 display_height = 550
 screen = pygame.display.set_mode((display_width, display_height))
 
-# Create screen with pixel length x height of 800 x 600
+# Game caption
 pygame.display.set_caption("Sudoku Puzzle")
 
 # Title and Icon
@@ -59,6 +90,7 @@ bright_red = (255, 0, 0)
 bright_green = (0, 255, 0)
 gray = (192, 192, 192)
 light_blue = (193, 225, 236)
+blue = (0, 0, 255)
 
 # Clock
 clock = pygame.time.Clock()
@@ -84,7 +116,7 @@ def button(text, x_coordinate, y_coordinate, button_width, button_height, color,
 
     # Button Text
     button_text = pygame.font.Font("freesansbold.ttf", 20)
-    text_surf, text_rect = text_objects(text, button_text)
+    text_surf, text_rect = text_objects(text, button_text, black)
     text_rect.center = ((x_coordinate + (button_width / 2)), (y_coordinate + (button_height / 2)))
     screen.blit(text_surf, text_rect)
 
@@ -92,8 +124,8 @@ def button(text, x_coordinate, y_coordinate, button_width, button_height, color,
     pygame.draw.rect(screen, black, (x_coordinate, y_coordinate, button_width, button_height), 2)
 
 
-def text_objects(text, font):
-    text_surface = font.render(text, True, black)
+def text_objects(text, font, color):
+    text_surface = font.render(text, True, color)
 
     return text_surface, text_surface.get_rect()
 
@@ -143,7 +175,7 @@ def main_menu():
 
         # Display Game Title
         title_text = pygame.font.Font('freesansbold.ttf', 115)
-        text_surf, text_rect = text_objects("Play Sudoku", title_text)
+        text_surf, text_rect = text_objects("Play Sudoku", title_text, black)
         text_rect.center = ((display_width / 2), (display_height / 3))
         screen.blit(text_surf, text_rect)
 
@@ -191,9 +223,40 @@ def start_sudoku():
         # Draw borders for sudoku board
         draw_border()
 
-        # TODO: Menu buttons
-        button("Exit", 550, 150, 150, 50, red, white, exit_game)
+        # Menu Buttons
         button("New Game", 550, 50, 150, 50, green, white)
+        # TODO: Solve button (Also visual representation of solving)
+        button("Auto Solve", 550, 150, 150, 50, green, white)
+
+        button("Exit", 550, 250, 150, 50, red, white, exit_game)
+
+        # Check if puzzle is solved
+        if grid == answer:
+            # Display victory text
+            button("Puzzle Solved", 550, 350, 150, 50, light_blue, light_blue)
+
+            # Lock grid when puzzle completed
+            for a in range(0, 9):
+                for b in range(0, 9):
+                    if grid[a][b] != 0:
+                        lock[a][b] = True
+
+        # Display numbers of the grid
+        cube_text = pygame.font.Font('freesansbold.ttf', 35)
+        for i in range(0, 9):
+            for j in range(0, 9):
+                # Make cube blank if '0'
+                if grid[j][i] == 0:
+                    continue
+
+                if lock[j][i]:
+                    text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, black)
+                    text_rect.center = (75 + i * 50, 80 + j * 50)
+                    screen.blit(text_surf, text_rect)
+                else:
+                    text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, bright_red)
+                    text_rect.center = (75 + i * 50, 80 + j * 50)
+                    screen.blit(text_surf, text_rect)
 
         # Gets all events
         for event in pygame.event.get():
@@ -205,6 +268,10 @@ def start_sudoku():
             # Generate new sudoku board on button click (unable to hold button)
             if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 50 < mouse[1] < 100:
                 new_game()
+
+            # Solve puzzle
+            if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 150 < mouse[1] < 200:
+                solve(grid)
 
             # Click to change highlighted position
             for i in range(0, 9):
@@ -225,8 +292,23 @@ def start_sudoku():
                 if event.key == pygame.K_UP and x > 0:
                     x = x - 1
 
-            # Number inputs
-            if event.type == pygame.KEYDOWN:
+                # TODO: Delete Test Keys when completed with project (below)
+                elif event.key == pygame.K_g:
+                    print(np.matrix(grid))
+                elif event.key == pygame.K_SPACE:
+                    generator.fill(grid)
+                elif event.key == pygame.K_n:
+                    for i in range(0, 9):
+                        for j in range(0, 9):
+                            grid[i][j] = 0
+                elif event.key == pygame.K_a:
+                    print(np.matrix(answer))
+                elif event.key == pygame.K_l:
+                    print(np.matrix(lock))
+                # TODO: Delete Test Keys when completed with project (above)
+
+            # Number inputs (checks if number is locked in grid)
+            if event.type == pygame.KEYDOWN and not lock[x][y]:
                 if event.key == pygame.K_0 or event.key == pygame.K_KP0 or event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
                     grid[x][y] = 0
                 elif event.key == pygame.K_1 or event.key == pygame.K_KP1:
@@ -248,42 +330,6 @@ def start_sudoku():
                 elif event.key == pygame.K_9 or event.key == pygame.K_KP9:
                     grid[x][y] = 9
 
-                # TODO: Delete Test Keys when completed with project (below)
-                elif event.key == pygame.K_g:
-                    print(np.matrix(grid))
-                elif event.key == pygame.K_SPACE:
-                    generator.fill(grid)
-                elif event.key == pygame.K_n:
-                    for i in range(0, 9):
-                        for j in range(0, 9):
-                            grid[i][j] = 0
-
-        # Display numbers of the grid
-        cube_text = pygame.font.Font('freesansbold.ttf', 35)
-        for i in range(0, 9):
-            for j in range(0, 9):
-                # Make cube blank if '0'
-                if grid[j][i] == 0:
-                    continue
-
-                text_surf, text_rect = text_objects(str(grid[j][i]), cube_text)
-                text_rect.center = (75 + i * 50, 80 + j * 50)
-                screen.blit(text_surf, text_rect)
-
-        # text_surf, text_rect = text_objects(str(grid[0][0]), cube_text)
-        # text_rect.center = (75, 80)
-        # screen.blit(text_surf, text_rect)
-        #
-        # text_surf, text_rect = text_objects(str(grid[0][1]), cube_text)
-        # text_rect.center = (125, 80)
-        # screen.blit(text_surf, text_rect)
-        #
-        # text_surf, text_rect = text_objects(str(grid[1][0]), cube_text)
-        # text_rect.center = (75, 130)
-        # screen.blit(text_surf, text_rect)
-
-        # TODO: Fix solver to receive input and return output
-
         # Update screen
         pygame.display.update()
 
@@ -295,13 +341,94 @@ def exit_game():
     quit()
 
 
-# TODO: Adjust to create a new puzzle (when fucntion is built)
-# TODO: Fix the infinite click issue
+# Creates new puzzle grid and answer grid
 def new_game():
+    for a in range(0, 9):
+        for b in range(0, 9):
+            grid[a][b] = 0
+
+    generator.fill(grid)
+
+    # Create new copy of answer
+    for a in range(0, 9):
+        for b in range(0, 9):
+            answer[a][b] = grid[a][b]
+
+    generator.add_blanks(grid)
+
+    # Record locked numbers
+    for a in range(0, 9):
+        for b in range(0, 9):
+            if grid[a][b] != 0:
+                lock[a][b] = True
+            else:
+                lock[a][b] = False
+
+
+def check_valid(y, x, number, puzzle):
+    # Check if row is valid
+    for a in range(0, 9):
+        if puzzle[y][a] == number:
+            return False
+
+    # Check if column is valid
+    for a in range(0, 9):
+        if puzzle[a][x] == number:
+            return False
+
+    # Floor division to determine which Sudoko box we are in
+    box_x = (x // 3) * 3
+    box_y = (y // 3) * 3
+
+    # Check to see if box is valid
+    for a in range(0, 3):
+        for b in range(0, 3):
+            if puzzle[box_y + a][box_x + b] == number:
+                return False
+
+    # Return True if row, column, and box checks pass
+    return True
+
+
+# Check to see if grid is solved
+def completed(puzzle):
+    count = 0
+
     for i in range(0, 9):
         for j in range(0, 9):
-            grid[i][j] = 0
-    generator.fill(grid)
+            if puzzle[i][j] == 0:
+                count = count + 1
+
+    if count == 0:
+        return True
+    else:
+        return False
+
+
+def solve(puzzle):
+    for y in range(0, 9):
+        for x in range(0, 9):
+            # Check if the grid is empty with '0'
+            if puzzle[y][x] == 0:
+                # For number choices between 1 and 9
+                for n in range(1, 10):
+                    # if valid
+                    if check_valid(y, x, n, puzzle):
+                        puzzle[y][x] = n
+
+                        # Recursive call to find next empty square
+                        solve(puzzle)
+
+                        # Check if solved
+                        if completed(puzzle):
+                            return
+
+                        # Backtracking
+                        puzzle[y][x] = 0
+
+                return
+
+    return puzzle
 
 
 main_menu()
