@@ -71,19 +71,44 @@ def fill(grid):
     return grid
 
 
-# TODO: Write ability to generate blanks on a generated sudoku grid
-# TODO: MAKE SURE YOU HAVE THE ALREADY SOLVED PUZZLE STORED (possibly needed or not?)
 def add_blanks(grid):
-    grid[2][2] = 0
+    limit = 5
+    for i in range(0, 9):
+        count = 0
+        for j in range(0, 9):
+            x = random.randint(0, 1)
+            if x == 1 and count != limit:
+                grid[i][j] = 0
+                count = count + 1
+
     return grid
 
-
-print(np.matrix(blank))
-
-fill(blank)
-
-print(np.matrix(blank))
-
-add_blanks(blank)
-
-print(np.matrix(blank))
+#
+# print(np.matrix(blank))
+#
+# fill(blank)
+#
+# reference = blank
+#
+# print(np.matrix(reference))
+#
+# print(np.matrix(blank))
+# #
+# add_blanks(blank)
+# #
+# # print(np.matrix(blank))
+# #
+#
+#
+# print(np.matrix(reference))
+# print(np.matrix(blank))
+#
+#
+# solver.solve(blank)
+#
+# print(np.matrix(blank))
+#
+# if reference == blank:
+#     print("TRUEEEE")
+# else:
+#     print("FASLE")
