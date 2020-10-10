@@ -2,7 +2,7 @@ import pygame
 
 import generator
 import validate
-import solver
+
 
 import numpy as np
 
@@ -126,7 +126,6 @@ def button(text, x_coordinate, y_coordinate, button_width, button_height, color,
 
 def text_objects(text, font, color):
     text_surface = font.render(text, True, color)
-
     return text_surface, text_surface.get_rect()
 
 
@@ -148,6 +147,13 @@ def draw_border():
     pygame.draw.rect(screen, black, (square_size, square_size + square_size * 3, square_size * 9, square_size * 3), 2)
     pygame.draw.rect(screen, black, (square_size + square_size * 3, square_size, square_size * 3, square_size * 9), 2)
     pygame.draw.rect(screen, black, (square_size, square_size, square_size * 9, square_size * 9), 2)
+
+
+# Clears contents of a designated cube in sudoku puzzle
+def clear_cube(x_coordinate, y_coordinate):
+    pygame.draw.rect(screen, white, (52 + 50 * x_coordinate, 52 + 50 * y_coordinate, 45, 45))
+    # Update display
+    pygame.display.update()
 
 
 # Open Game Menu
@@ -225,9 +231,11 @@ def start_sudoku():
 
         # Menu Buttons
         button("New Game", 550, 50, 150, 50, green, white)
-        # TODO: Solve button (Also visual representation of solving)
+
+        # Solve via backtracking algorithm
         button("Auto Solve", 550, 150, 150, 50, green, white)
 
+        # Exit game
         button("Exit", 550, 250, 150, 50, red, white, exit_game)
 
         # Check if puzzle is solved
@@ -406,6 +414,8 @@ def completed(puzzle):
 
 
 def solve(puzzle):
+    cube_text = pygame.font.Font('freesansbold.ttf', 35)
+
     for y in range(0, 9):
         for x in range(0, 9):
             # Check if the grid is empty with '0'
@@ -415,6 +425,18 @@ def solve(puzzle):
                     # if valid
                     if check_valid(y, x, n, puzzle):
                         puzzle[y][x] = n
+
+                        if lock[y][x]:
+                            text_surf, text_rect = text_objects(str(grid[y][x]), cube_text, green)
+                            text_rect.center = (75 + x * 50, 80 + y * 50)
+                            screen.blit(text_surf, text_rect)
+                        else:
+                            text_surf, text_rect = text_objects(str(grid[y][x]), cube_text, green)
+                            text_rect.center = (75 + x * 50, 80 + y * 50)
+                            screen.blit(text_surf, text_rect)
+
+                        pygame.display.update()
+                        pygame.time.wait(55)
 
                         # Recursive call to find next empty square
                         solve(puzzle)
@@ -426,6 +448,8 @@ def solve(puzzle):
                         # Backtracking
                         puzzle[y][x] = 0
 
+                        # Make cube box white
+                        clear_cube(x, y)
                 return
 
     return puzzle
