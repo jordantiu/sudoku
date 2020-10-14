@@ -9,25 +9,25 @@ def check_valid_inputs(grid):
 
 # Validates Sudoku puzzle by checking if there are any duplicates within a row, column or within a box
 def check_duplicate(grid):
-    # TODO: Check Duplicates in Rows and Columns
+    # Check Duplicates in Rows and Columns
     for i in range(0, 9):
         seen_row = set()
         seen_column = set()
         for j in range(0, 9):
             if grid[i][j] in seen_row:
-                print("Error: Duplicate found in row", i, "with duplicate", grid[i][j])
+                # print("Error: Duplicate found in row", i, "with duplicate", grid[i][j])
                 return False
             else:
                 seen_row.add(grid[i][j])
 
             if grid[j][i] in seen_column:
-                print("Error: Duplicate found in column", i, "with duplicate", grid[j][i])
+                # print("Error: Duplicate found in column", i, "with duplicate", grid[j][i])
                 return False
             else:
                 seen_column.add(grid[j][i])
 
-    # TODO: Check for duplicates in boxes
-    # Check to see if box is valid
+    # Check for duplicates in boxes
+
     # Set x counter
     x = 0
     # Seen square set
@@ -52,7 +52,7 @@ def check_duplicate(grid):
             seen_square.add(grid[x + 2][y + 2])
 
             if len(seen_square) != 9:
-                print("Error: Box", i, j, "is invalid. Contains a duplicate")
+                # print("Error: Box", i, j, "is invalid. Contains a duplicate")
                 return False
 
             # Increment y counter
