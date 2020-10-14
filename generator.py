@@ -13,6 +13,18 @@ blank = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
+answer = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
 
 def check_valid(y, x, number, grid):
     # Check if row is valid
@@ -92,6 +104,7 @@ def reset_grid(grid):
 count = 0
 is_unique = True
 
+
 def check_if_unique(grid):
     global count
     global is_unique
@@ -128,6 +141,7 @@ def check_if_unique(grid):
 
     return
 
+
 # fill(blank)
 # add_blanks(blank)
 # print(np.matrix(blank))
@@ -138,11 +152,17 @@ def check_if_unique(grid):
 def generate_unique_puzzle(grid):
     global is_unique
     global count
+    global answer
 
     building_sudoku = True
 
     while building_sudoku:
         fill(grid)
+
+        for i in range(0, 9):
+            for j in range(0, 9):
+                answer[i][j] = grid[i][j]
+
         add_blanks(grid)
         check_if_unique(grid)
 
@@ -162,10 +182,26 @@ def generate_unique_puzzle(grid):
                 [0, 0, 0, 0, 0, 0, 0, 0, 0]
             ]
 
+            answer = [
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0, 0, 0]
+            ]
+
             is_unique = True
             count = 0
 
     return grid
 
 
-generate_unique_puzzle(blank)
+# print(np.matrix(generate_unique_puzzle(blank)))
+# print(np.matrix(answer))
+
+def get_answer():
+    return answer
