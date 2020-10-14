@@ -97,7 +97,8 @@ def solve(grid):
                         grid[y][x] = 0
 
                 return
-
+    # TODO: Fix to verify that there is more than only one unique solution
+    # Reference: https://www.youtube.com/watch?v=G_UYXzGuqvM&t=19s
     return grid
 
 # print(np.matrix(puzzle))
