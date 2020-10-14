@@ -1,30 +1,10 @@
 import pygame
-
 import generator
 import validate
-
-
 import numpy as np
-
-# TODO: References
-# https://pythonprogramming.net/pygame-start-menu-tutorial/?completed=/pygame-drawing-shapes-objects/
-# https://www.youtube.com/watch?v=jh_m-Eytq0Q&list=PLQVvvaa0QuDdLkP8MrOXLe_rKuf6r80KO&index=11&ab_channel=sentdex
 
 # Blank Grid
 grid = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0]
-]
-
-# Answer grid
-answer = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -49,16 +29,8 @@ lock = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-# Initial fill grid
-generator.fill(grid)
-
-# Copy answer grid
-for i in range(0, 9):
-    for j in range(0, 9):
-        answer[i][j] = grid[i][j]
-
-# Add blanks to puzzle
-generator.add_blanks(grid)
+# Generate unique puzzle
+generator.generate_unique_puzzle(grid)
 
 # Record locked numbers
 for i in range(0, 9):
@@ -214,7 +186,7 @@ def start_sudoku():
 
         # Mouse position
         mouse = pygame.mouse.get_pos()
-        print(mouse)
+        # print(mouse)
 
         # Background screen color
         screen.fill(white)
@@ -239,7 +211,7 @@ def start_sudoku():
         button("Exit", 550, 250, 150, 50, red, white, exit_game)
 
         # Check if puzzle is solved
-        if grid == answer:
+        if validate.check_grid(grid):
             # Display victory text
             button("Puzzle Solved", 550, 350, 150, 50, light_blue, light_blue)
 
@@ -309,8 +281,6 @@ def start_sudoku():
                     for i in range(0, 9):
                         for j in range(0, 9):
                             grid[i][j] = 0
-                elif event.key == pygame.K_a:
-                    print(np.matrix(answer))
                 elif event.key == pygame.K_l:
                     print(np.matrix(lock))
                 # TODO: Delete Test Keys when completed with project (above)
@@ -351,18 +321,14 @@ def exit_game():
 
 # Creates new puzzle grid and answer grid
 def new_game():
+
+    # Reset grid
     for a in range(0, 9):
         for b in range(0, 9):
             grid[a][b] = 0
 
-    generator.fill(grid)
-
-    # Create new copy of answer
-    for a in range(0, 9):
-        for b in range(0, 9):
-            answer[a][b] = grid[a][b]
-
-    generator.add_blanks(grid)
+    # Generate new grid with blanks
+    generator.generate_unique_puzzle(grid)
 
     # Record locked numbers
     for a in range(0, 9):
@@ -436,7 +402,7 @@ def solve(puzzle):
                             screen.blit(text_surf, text_rect)
 
                         pygame.display.update()
-                        pygame.time.wait(55)
+                        pygame.time.wait(50)
 
                         # Recursive call to find next empty square
                         solve(puzzle)
@@ -456,3 +422,4 @@ def solve(puzzle):
 
 
 main_menu()
+
