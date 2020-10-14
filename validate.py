@@ -64,10 +64,51 @@ def check_duplicate(grid):
     return True
 
 
+# Validates Sudoku puzzle by checking if sums of each of the rows, columns, and boxes is equal to 45
+def check_sum(grid):
+    for i in range(0, 9):
+        # Validate row sum
+        if sum(grid[i]) != 45:
+            # print("Error: Row", i, "is invalid.")
+            return False
+
+        # Validate column Sum
+        if grid[0][i] + grid[1][i] + grid[2][i] + grid[3][i] + grid[4][i] + grid[5][i] + grid[6][i] + grid[7][i] + \
+                grid[8][i] != 45:
+            # print("Error: Column", i, "is invalid.")
+            return False
+
+    # Check to see if box is valid
+    # Set x counter
+    x = 0
+
+    for i in range(0, 3):
+        # Set/Reset y counter
+        y = 0
+
+        # Check sum of each box
+        for j in range(0, 3):
+            if grid[x][y] + grid[x + 1][y] + grid[x + 2][y] + \
+                    grid[x][y + 1] + grid[x + 1][y + 1] + grid[x + 2][y + 1] + \
+                    grid[x][y + 2] + grid[x + 1][y + 2] + grid[x + 2][y + 2] != 45:
+                # print("Error: Box", i, j, "is invalid.")
+                return False
+
+            # Increment y counter
+            y = y + 3
+
+        # Increment the x counter
+        x = x + 3
+
+    return True
+
+
 def check_grid(grid):
     if not check_valid_inputs(grid):
         return False
-    if not check_duplicate(grid):
+    elif not check_duplicate(grid):
+        return False
+    elif not check_sum(grid):
         return False
     return True
 
