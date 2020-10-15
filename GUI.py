@@ -251,6 +251,27 @@ def start_sudoku():
 
             # Solve puzzle
             if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 150 < mouse[1] < 200:
+
+                # Hide the cursor
+                pygame.draw.rect(screen, white,
+                                 (y * square_size + square_size, x * square_size + square_size, square_size,
+                                  square_size))
+
+                # Redraw the sudoku game board
+                draw_board()
+
+                # Redraw borders for sudoku board
+                draw_border()
+
+                # Reset the grid to initial puzzle
+                for i in range(0, 9):
+                    for j in range(0, 9):
+                        if not lock[i][j]:
+                            grid[i][j] = 0
+
+                            # Make cube box white
+                            clear_cube(j, i)
+
                 solve(grid)
 
             # Click to change highlighted position
@@ -321,7 +342,6 @@ def exit_game():
 
 # Creates new puzzle grid and answer grid
 def new_game():
-
     # Reset grid
     for a in range(0, 9):
         for b in range(0, 9):
@@ -422,4 +442,3 @@ def solve(puzzle):
 
 
 main_menu()
-
