@@ -63,6 +63,8 @@ bright_green = (0, 255, 0)
 gray = (192, 192, 192)
 light_blue = (193, 225, 236)
 blue = (0, 0, 255)
+blue_button = (3, 169, 252)
+blue_button_hover = (89, 200, 255)
 
 # Clock
 clock = pygame.time.Clock()
@@ -146,7 +148,7 @@ def main_menu():
         # Note mouse[0] is x coordinate of mouse; mouse[1] is y coordinate
         # Start button hover
 
-        button("Start", display_width / 2 - 50, 350, 100, 50, green, bright_green, start_sudoku)
+        button("Start", display_width / 2 - 50, 350, 100, 50, blue_button, blue_button_hover, start_sudoku)
         button("Exit", display_width / 2 - 50, 450, 100, 50, red, bright_red, exit_game)
 
         # Position away from left, position away from top, button size length (increases to right), button size height (increases downward)
@@ -182,6 +184,9 @@ def start_sudoku():
     x = 0
     y = 0
 
+    # Notes
+    notes_mode = False
+
     while sudoku:
 
         # Mouse position
@@ -202,18 +207,25 @@ def start_sudoku():
         draw_border()
 
         # Menu Buttons
-        button("New Game", 550, 50, 150, 50, green, white)
+        button("New Game", 550, 50, 150, 50, blue_button, blue_button_hover)
+
+        if not notes_mode:
+            note_text = "Notes (OFF)"
+        else:
+            note_text = "Notes (ON)"
+        # Notes
+        button(note_text, 550, 150, 150, 50, blue_button, blue_button_hover)
 
         # Solve via backtracking algorithm
-        button("Auto Solve", 550, 150, 150, 50, green, white)
+        button("Auto Solve", 550, 250, 150, 50, blue_button, blue_button_hover)
 
         # Exit game
-        button("Exit", 550, 250, 150, 50, red, white, exit_game)
+        button("Exit", 550, 350, 150, 50, red, bright_red, exit_game)
 
         # Check if puzzle is solved
         if validate.check_grid(grid):
             # Display victory text
-            button("Puzzle Solved", 550, 350, 150, 50, light_blue, light_blue)
+            button("Puzzle Solved", 550, 450, 150, 50, light_blue, light_blue)
 
             # Lock grid when puzzle completed
             for a in range(0, 9):
@@ -249,13 +261,37 @@ def start_sudoku():
             if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 50 < mouse[1] < 100:
                 new_game()
 
-            # Solve puzzle
+            # Generate new sudoku board on button click (unable to hold button)
             if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 150 < mouse[1] < 200:
+                if not notes_mode:
+                    notes_mode = True
+                else:
+                    notes_mode = False
+
+            # Solve puzzle on click
+            if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 250 < mouse[1] < 300:
 
                 # Hide the cursor
                 pygame.draw.rect(screen, white,
                                  (y * square_size + square_size, x * square_size + square_size, square_size,
                                   square_size))
+
+                # Redraw numbers of the grid
+                cube_text = pygame.font.Font('freesansbold.ttf', 35)
+                for i in range(0, 9):
+                    for j in range(0, 9):
+                        # Make cube blank if '0'
+                        if grid[j][i] == 0:
+                            continue
+
+                        if lock[j][i]:
+                            text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, black)
+                            text_rect.center = (75 + i * 50, 80 + j * 50)
+                            screen.blit(text_surf, text_rect)
+                        else:
+                            text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, bright_red)
+                            text_rect.center = (75 + i * 50, 80 + j * 50)
+                            screen.blit(text_surf, text_rect)
 
                 # Redraw the sudoku game board
                 draw_board()
