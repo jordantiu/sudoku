@@ -264,11 +264,6 @@ def main_menu():
         pygame.display.update()
 
 
-# TODO: Current work position 10.07.2020
-# https://www.youtube.com/watch?v=XpYz-q1lxu8&feature=emb_title
-# Sudoku game
-
-
 # NOTE: The game board is buffered from the top left hand corner by a square_size number of pixels
 square_size = 50
 column_count = 9
@@ -334,6 +329,11 @@ def start_sudoku():
                     if grid[a][b] != 0:
                         lock[a][b] = True
 
+            # Remove notes
+            for i in range(0, 81):
+                for j in range(0, 9):
+                    note[i][j] = 0
+
         # Display numbers of the grid
         cube_text = pygame.font.Font('freesansbold.ttf', 35)
         for i in range(0, 9):
@@ -351,7 +351,7 @@ def start_sudoku():
                     text_rect.center = (75 + i * 50, 80 + j * 50)
                     screen.blit(text_surf, text_rect)
 
-        # TODO: Display note numbers
+        # Display note numbers
         note_text = pygame.font.Font('freesansbold.ttf', 15)
         for i in range(0, 81):
             for j in range(0, 9):
@@ -360,15 +360,15 @@ def start_sudoku():
 
                 if 0 <= j <= 2:
                     text_surf, text_rect = text_objects(str(note[i][j]), note_text, black)
-                    text_rect.center = (50 + 10 + j * 15 + 50 * (i % 9), 50 + 10 + 0 + 50 * (i // 9))
+                    text_rect.center = (50 + 10 + j * 15 + 50 * (i % 9), 53 + 10 + 0 + 50 * (i // 9))
                     screen.blit(text_surf, text_rect)
                 elif 3 <= j <= 5:
                     text_surf, text_rect = text_objects(str(note[i][j]), note_text, black)
-                    text_rect.center = (50 + 10 + j % 3 * 15 + 50 * (i % 9), 50 + 10 + 15 + 50 * (i // 9))
+                    text_rect.center = (50 + 10 + j % 3 * 15 + 50 * (i % 9), 53 + 10 + 15 + 50 * (i // 9))
                     screen.blit(text_surf, text_rect)
                 elif 6 <= j <= 8:
                     text_surf, text_rect = text_objects(str(note[i][j]), note_text, black)
-                    text_rect.center = (50 + 10 + j % 6 * 15 + 50 * (i % 9), 50 + 10 + 30 + 50 * (i // 9))
+                    text_rect.center = (50 + 10 + j % 6 * 15 + 50 * (i % 9), 53 + 10 + 30 + 50 * (i // 9))
                     screen.blit(text_surf, text_rect)
 
         # Gets all events
@@ -439,7 +439,7 @@ def start_sudoku():
                         x = i
                         y = j
 
-                        # Formula for hint position
+                        # Formula for notes position
                         note_position = 9 * x + y
 
             # Arrow key movements
@@ -472,33 +472,49 @@ def start_sudoku():
 
             # Number inputs (checks if number is locked in grid)
             if event.type == pygame.KEYDOWN and not lock[x][y] and not notes_mode:
-                # Clear the notes for cube
-                for i in range(0, 9):
-                    note[note_position][i] = 0
 
                 if event.key == pygame.K_0 or event.key == pygame.K_KP0 or event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
                     grid[x][y] = 0
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_1 or event.key == pygame.K_KP1:
                     grid[x][y] = 1
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_2 or event.key == pygame.K_KP2:
                     grid[x][y] = 2
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_3 or event.key == pygame.K_KP3:
                     grid[x][y] = 3
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_4 or event.key == pygame.K_KP4:
                     grid[x][y] = 4
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_5 or event.key == pygame.K_KP5:
                     grid[x][y] = 5
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_6 or event.key == pygame.K_KP6:
                     grid[x][y] = 6
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_7 or event.key == pygame.K_KP7:
                     grid[x][y] = 7
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_8 or event.key == pygame.K_KP8:
                     grid[x][y] = 8
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
                 elif event.key == pygame.K_9 or event.key == pygame.K_KP9:
                     grid[x][y] = 9
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
 
             # Add notes to grid
-            # TODO: Address the grid being blank when grid position is 0 so as to display the numbers properly
             elif event.type == pygame.KEYDOWN and not lock[x][y] and notes_mode:
 
                 print("x", x)
@@ -508,7 +524,7 @@ def start_sudoku():
                 if event.key == pygame.K_0 or event.key == pygame.K_KP0 or event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
                     grid[x][y] = 0
                     clear_cube(x, y)
-                    # Clear the hints for cube
+                    # Clear the notes for cube
                     for i in range(0, 9):
                         note[note_position][i] = 0
                 elif event.key == pygame.K_1 or event.key == pygame.K_KP1:
@@ -559,10 +575,10 @@ def new_game():
         for b in range(0, 9):
             grid[a][b] = 0
 
-    # Reset hints
+    # Reset notes
     for i in range(0, 81):
         for j in range(0, 9):
-            hint[i][j] = 0
+            note[i][j] = 0
 
     # Generate new grid with blanks
     generator.generate_unique_puzzle(grid)
