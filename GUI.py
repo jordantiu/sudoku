@@ -29,6 +29,107 @@ lock = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
+note = [
+    # Squares 0 to 8
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    # Squares 9 to 17
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    # Squares 18 to 26
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    # Squares 27 to 35
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    # Squares 36 to 44
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    # Squares 45 to 53
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    # Squares 54 to 62
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    # Squares 63 to 71
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+
+    # Squares 72 to 80
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
 # Generate unique puzzle
 generator.generate_unique_puzzle(grid)
 
@@ -250,6 +351,26 @@ def start_sudoku():
                     text_rect.center = (75 + i * 50, 80 + j * 50)
                     screen.blit(text_surf, text_rect)
 
+        # TODO: Display note numbers
+        note_text = pygame.font.Font('freesansbold.ttf', 15)
+        for i in range(0, 81):
+            for j in range(0, 9):
+                if note[i][j] == 0:
+                    continue
+
+                if 0 <= j <= 2:
+                    text_surf, text_rect = text_objects(str(note[i][j]), note_text, black)
+                    text_rect.center = (50 + 10 + j * 15 + 50 * (i % 9), 50 + 10 + 0 + 50 * (i // 9))
+                    screen.blit(text_surf, text_rect)
+                elif 3 <= j <= 5:
+                    text_surf, text_rect = text_objects(str(note[i][j]), note_text, black)
+                    text_rect.center = (50 + 10 + j % 3 * 15 + 50 * (i % 9), 50 + 10 + 15 + 50 * (i // 9))
+                    screen.blit(text_surf, text_rect)
+                elif 6 <= j <= 8:
+                    text_surf, text_rect = text_objects(str(note[i][j]), note_text, black)
+                    text_rect.center = (50 + 10 + j % 6 * 15 + 50 * (i % 9), 50 + 10 + 30 + 50 * (i // 9))
+                    screen.blit(text_surf, text_rect)
+
         # Gets all events
         for event in pygame.event.get():
 
@@ -318,6 +439,9 @@ def start_sudoku():
                         x = i
                         y = j
 
+                        # Formula for hint position
+                        note_position = 9 * x + y
+
             # Arrow key movements
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT and y > 0:
@@ -340,10 +464,18 @@ def start_sudoku():
                             grid[i][j] = 0
                 elif event.key == pygame.K_l:
                     print(np.matrix(lock))
+
                 # TODO: Delete Test Keys when completed with project (above)
 
+                # Formula for note position
+                note_position = 9 * x + y
+
             # Number inputs (checks if number is locked in grid)
-            if event.type == pygame.KEYDOWN and not lock[x][y]:
+            if event.type == pygame.KEYDOWN and not lock[x][y] and not notes_mode:
+                # Clear the notes for cube
+                for i in range(0, 9):
+                    note[note_position][i] = 0
+
                 if event.key == pygame.K_0 or event.key == pygame.K_KP0 or event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
                     grid[x][y] = 0
                 elif event.key == pygame.K_1 or event.key == pygame.K_KP1:
@@ -365,6 +497,50 @@ def start_sudoku():
                 elif event.key == pygame.K_9 or event.key == pygame.K_KP9:
                     grid[x][y] = 9
 
+            # Add notes to grid
+            # TODO: Address the grid being blank when grid position is 0 so as to display the numbers properly
+            elif event.type == pygame.KEYDOWN and not lock[x][y] and notes_mode:
+
+                print("x", x)
+                print("y", y)
+                print(note_position)
+
+                if event.key == pygame.K_0 or event.key == pygame.K_KP0 or event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
+                    grid[x][y] = 0
+                    clear_cube(x, y)
+                    # Clear the hints for cube
+                    for i in range(0, 9):
+                        note[note_position][i] = 0
+                elif event.key == pygame.K_1 or event.key == pygame.K_KP1:
+                    grid[x][y] = 0
+                    note[note_position][0] = 1
+                elif event.key == pygame.K_2 or event.key == pygame.K_KP2:
+                    grid[x][y] = 0
+                    note[note_position][1] = 2
+                elif event.key == pygame.K_3 or event.key == pygame.K_KP3:
+                    grid[x][y] = 0
+                    note[note_position][2] = 3
+                elif event.key == pygame.K_4 or event.key == pygame.K_KP4:
+                    grid[x][y] = 0
+                    note[note_position][3] = 4
+                elif event.key == pygame.K_5 or event.key == pygame.K_KP5:
+                    grid[x][y] = 0
+                    note[note_position][4] = 5
+                elif event.key == pygame.K_6 or event.key == pygame.K_KP6:
+                    grid[x][y] = 0
+                    note[note_position][5] = 6
+                elif event.key == pygame.K_7 or event.key == pygame.K_KP7:
+                    grid[x][y] = 0
+                    note[note_position][6] = 7
+                elif event.key == pygame.K_8 or event.key == pygame.K_KP8:
+                    grid[x][y] = 0
+                    note[note_position][7] = 8
+                elif event.key == pygame.K_9 or event.key == pygame.K_KP9:
+                    grid[x][y] = 0
+                    note[note_position][8] = 9
+                elif event.key == pygame.K_h:
+                    print(np.matrix(note))
+
         # Update screen
         pygame.display.update()
 
@@ -382,6 +558,11 @@ def new_game():
     for a in range(0, 9):
         for b in range(0, 9):
             grid[a][b] = 0
+
+    # Reset hints
+    for i in range(0, 81):
+        for j in range(0, 9):
+            hint[i][j] = 0
 
     # Generate new grid with blanks
     generator.generate_unique_puzzle(grid)
