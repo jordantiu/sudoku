@@ -174,11 +174,9 @@ clock = pygame.time.Clock()
 def button(text, x_coordinate, y_coordinate, button_width, button_height, color, hover_color, action=None):
     # Mouse Position
     mouse = pygame.mouse.get_pos()
-    # print(mouse)
+    # Click Position
     click = pygame.mouse.get_pressed()
-    # print(click)
 
-    # Note: mouse[0] is x coordinate of mouse; mouse[1] is y coordinate
     # Button Hover
     if x_coordinate < mouse[0] < x_coordinate + button_width and y_coordinate < mouse[1] < y_coordinate + button_height:
         pygame.draw.rect(screen, hover_color, (x_coordinate, y_coordinate, button_width, button_height))
@@ -225,8 +223,8 @@ def draw_border():
 
 
 # Clears contents of a designated cube in sudoku puzzle
-def clear_cube(x_coordinate, y_coordinate):
-    pygame.draw.rect(screen, white, (52 + 50 * x_coordinate, 52 + 50 * y_coordinate, 45, 45))
+def color_cube(x_coordinate, y_coordinate, color):
+    pygame.draw.rect(screen, color, (52 + 50 * x_coordinate, 52 + 50 * y_coordinate, 45, 45))
     # Update display
     pygame.display.update()
 
@@ -264,7 +262,6 @@ def main_menu():
         pygame.display.update()
 
 
-# NOTE: The game board is buffered from the top left hand corner by a square_size number of pixels
 square_size = 50
 column_count = 9
 row_count = 9
@@ -287,7 +284,6 @@ def start_sudoku():
 
         # Mouse position
         mouse = pygame.mouse.get_pos()
-        # print(mouse)
 
         # Background screen color
         screen.fill(white)
@@ -309,6 +305,7 @@ def start_sudoku():
             note_text = "Notes (OFF)"
         else:
             note_text = "Notes (ON)"
+
         # Notes
         button(note_text, 550, 150, 150, 50, blue_button, blue_button_hover)
 
@@ -427,7 +424,7 @@ def start_sudoku():
                             grid[i][j] = 0
 
                             # Make cube box white
-                            clear_cube(j, i)
+                            color_cube(j, i, white)
 
                 solve(grid)
 
@@ -452,20 +449,6 @@ def start_sudoku():
                     x = x + 1
                 if event.key == pygame.K_UP and x > 0:
                     x = x - 1
-
-                # TODO: Delete Test Keys when completed with project (below)
-                elif event.key == pygame.K_g:
-                    print(np.matrix(grid))
-                elif event.key == pygame.K_SPACE:
-                    generator.fill(grid)
-                elif event.key == pygame.K_n:
-                    for i in range(0, 9):
-                        for j in range(0, 9):
-                            grid[i][j] = 0
-                elif event.key == pygame.K_l:
-                    print(np.matrix(lock))
-
-                # TODO: Delete Test Keys when completed with project (above)
 
                 # Formula for note position
                 note_position = 9 * x + y
@@ -517,13 +500,9 @@ def start_sudoku():
             # Add notes to grid
             elif event.type == pygame.KEYDOWN and not lock[x][y] and notes_mode:
 
-                print("x", x)
-                print("y", y)
-                print(note_position)
-
                 if event.key == pygame.K_0 or event.key == pygame.K_KP0 or event.key == pygame.K_BACKSPACE or event.key == pygame.K_DELETE:
                     grid[x][y] = 0
-                    clear_cube(x, y)
+                    color_cube(x, y, white)
                     # Clear the notes for cube
                     for i in range(0, 9):
                         note[note_position][i] = 0
@@ -554,8 +533,6 @@ def start_sudoku():
                 elif event.key == pygame.K_9 or event.key == pygame.K_KP9:
                     grid[x][y] = 0
                     note[note_position][8] = 9
-                elif event.key == pygame.K_h:
-                    print(np.matrix(note))
 
         # Update screen
         pygame.display.update()
@@ -668,7 +645,7 @@ def solve(puzzle):
                         puzzle[y][x] = 0
 
                         # Make cube box white
-                        clear_cube(x, y)
+                        color_cube(x, y, white)
                 return
 
     return puzzle
