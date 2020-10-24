@@ -408,7 +408,7 @@ def start_sudoku():
             if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 50 < mouse[1] < 100:
                 new_game()
 
-            # Generate new sudoku board on button click (unable to hold button)
+            # Toggle notes mode on/off
             if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 150 < mouse[1] < 200:
                 if not notes_mode:
                     notes_mode = True
@@ -417,6 +417,9 @@ def start_sudoku():
 
             # Solve puzzle on click
             if event.type == pygame.MOUSEBUTTONDOWN and 550 < mouse[0] < 700 and 250 < mouse[1] < 300:
+
+                # White square to reset board
+                pygame.draw.rect(screen, white, (50, 50, 450, 450))
 
                 # Hide the cursor
                 pygame.draw.rect(screen, white,
@@ -685,8 +688,6 @@ def check_duplicate():
     for i in range(0, 9):
         for j in range(0, 9):
             duplicate[i][j] = 0
-
-    print(np.matrix(duplicate))
 
     # Check Duplicates in Rows and Columns
     for i in range(0, 9):
