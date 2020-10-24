@@ -130,6 +130,18 @@ note = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
+duplicate = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+]
+
 # Generate unique puzzle
 generator.generate_unique_puzzle(grid)
 
@@ -166,6 +178,8 @@ light_blue = (193, 225, 236)
 blue = (0, 0, 255)
 blue_button = (3, 169, 252)
 blue_button_hover = (89, 200, 255)
+duplicate_red = (255, 204, 203)
+temp_number_blue = (1, 87, 155)
 
 # Clock
 clock = pygame.time.Clock()
@@ -288,6 +302,17 @@ def start_sudoku():
         # Background screen color
         screen.fill(white)
 
+        # Check for duplicates
+        check_duplicate()
+
+        # Color Duplicate Squares
+        for i in range(0, 9):
+            for j in range(0, 9):
+                if duplicate[i][j] == 1:
+                    pygame.draw.rect(screen, duplicate_red,
+                                     (j * square_size + square_size, i * square_size + square_size, square_size,
+                                      square_size))
+
         # Highlight current position on board
         pygame.draw.rect(screen, light_blue,
                          (y * square_size + square_size, x * square_size + square_size, square_size, square_size))
@@ -343,8 +368,12 @@ def start_sudoku():
                     text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, black)
                     text_rect.center = (75 + i * 50, 80 + j * 50)
                     screen.blit(text_surf, text_rect)
+                elif duplicate[j][i] == 1:
+                    text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, red)
+                    text_rect.center = (75 + i * 50, 80 + j * 50)
+                    screen.blit(text_surf, text_rect)
                 else:
-                    text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, bright_red)
+                    text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, temp_number_blue)
                     text_rect.center = (75 + i * 50, 80 + j * 50)
                     screen.blit(text_surf, text_rect)
 
@@ -649,6 +678,87 @@ def solve(puzzle):
                 return
 
     return puzzle
+
+
+# TODO: Create a function that will highlight duplicates that exist in a row, column, or box
+def check_duplicate():
+    for i in range(0, 9):
+        for j in range(0, 9):
+            duplicate[i][j] = 0
+
+    print(np.matrix(duplicate))
+
+    # Check Duplicates in Rows and Columns
+    for i in range(0, 9):
+
+        for j in range(0, 9):
+            # Check for duplicates in respective row
+            for column_number in range(0, 9):
+                if grid[i][j] == grid[i][column_number] and j != column_number and grid[i][j] != 0:
+                    duplicate[i][j] = True
+
+            # Check for duplicates in respective column
+            for row_number in range(0, 9):
+                if grid[i][j] == grid[row_number][j] and i != row_number and grid[i][j] != 0:
+                    duplicate[i][j] = True
+
+            # Check for duplicates in respective box
+            box_x = i // 3
+            box_y = j // 3
+
+            if box_x == 0 and box_y == 0:
+                for x in range(0, 3):
+                    for y in range(0, 3):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
+
+            elif box_x == 0 and box_y == 1:
+                for x in range(0, 3):
+                    for y in range(3, 6):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
+
+            elif box_x == 0 and box_y == 2:
+                for x in range(0, 3):
+                    for y in range(6, 9):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
+
+            elif box_x == 1 and box_y == 0:
+                for x in range(3, 6):
+                    for y in range(0, 3):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
+
+            elif box_x == 1 and box_y == 1:
+                for x in range(3, 6):
+                    for y in range(3, 6):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
+
+            elif box_x == 1 and box_y == 2:
+                for x in range(3, 6):
+                    for y in range(6, 9):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
+
+            elif box_x == 2 and box_y == 0:
+                for x in range(6, 9):
+                    for y in range(0, 3):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
+
+            elif box_x == 2 and box_y == 1:
+                for x in range(6, 9):
+                    for y in range(3, 6):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
+
+            elif box_x == 2 and box_y == 2:
+                for x in range(6, 9):
+                    for y in range(6, 9):
+                        if grid[i][j] == grid[x][y] and i != x and j != y and grid[i][j] != 0:
+                            duplicate[i][j] = True
 
 
 main_menu()
