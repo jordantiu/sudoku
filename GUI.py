@@ -178,6 +178,7 @@ light_blue = (193, 225, 236)
 blue = (0, 0, 255)
 blue_button = (3, 169, 252)
 blue_button_hover = (89, 200, 255)
+blue_number = (3, 169, 252)
 duplicate_red = (255, 204, 203)
 temp_number_blue = (1, 87, 155)
 
@@ -373,7 +374,7 @@ def start_sudoku():
                     text_rect.center = (75 + i * 50, 80 + j * 50)
                     screen.blit(text_surf, text_rect)
                 else:
-                    text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, temp_number_blue)
+                    text_surf, text_rect = text_objects(str(grid[j][i]), cube_text, blue_number)
                     text_rect.center = (75 + i * 50, 80 + j * 50)
                     screen.blit(text_surf, text_rect)
 
@@ -655,11 +656,11 @@ def solve(puzzle):
                         puzzle[y][x] = n
 
                         if lock[y][x]:
-                            text_surf, text_rect = text_objects(str(grid[y][x]), cube_text, green)
+                            text_surf, text_rect = text_objects(str(grid[y][x]), cube_text, black)
                             text_rect.center = (75 + x * 50, 80 + y * 50)
                             screen.blit(text_surf, text_rect)
                         else:
-                            text_surf, text_rect = text_objects(str(grid[y][x]), cube_text, green)
+                            text_surf, text_rect = text_objects(str(grid[y][x]), cube_text, blue_number)
                             text_rect.center = (75 + x * 50, 80 + y * 50)
                             screen.blit(text_surf, text_rect)
 
