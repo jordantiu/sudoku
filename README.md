@@ -10,7 +10,7 @@ https://trello.com/b/8zKqdjLd/sudoku-board-project
 <br />
 <p align="center">
   <a href="https://github.com/jordantiu/sudoku">
-    <img src="images/input.gif" alt="Logo" width="80" height="80">
+    <img src="images/input.gif" alt="Logo" width="980" height="720">
   </a>
 
   <h3 align="center">YOUR_TITLE</h3>
