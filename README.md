@@ -1,30 +1,15 @@
-# sudoku
+# Sudoku
 Project for Sudoku solver/validator/generator
 
-
-https://trello.com/b/8zKqdjLd/sudoku-board-project
-
-<!-- PROJECT LOGO -->
+<!-- PROJECT -->
 <br />
 <p align="center">
   <a href="https://github.com/jordantiu/sudoku">
     <img src="images/input.gif" alt="Logo" width="490" height="360">
   </a>
 
-  <h3 align="center">YOUR_TITLE</h3>
+  <h1 align="center">Sudoku</h3>
 
-  <p align="center">
-    YOUR_SHORT_DESCRIPTION
-    <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
-  </p>
 </p>
 
 
