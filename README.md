@@ -1,13 +1,13 @@
-<!-- PROJECT -->
-<br />
+<!-- INTRO -->
+# Sudoku
+
 <p align="center">
-  <h1 align="center">Sudoku</h3>
   <a href="https://github.com/jordantiu/sudoku">
     <img src="images/input.gif" alt="Logo" width="490" height="360">
   </a>
 </p>
 
-
+<br />
 
 
 
