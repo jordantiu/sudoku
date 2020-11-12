@@ -3,7 +3,7 @@
 
 <p align="center">
   <a href="https://github.com/jordantiu/sudoku">
-    <img src="images/input.gif" alt="Logo" width="490" height="360">
+    <img src="images/auto_solver.gif" alt="Logo" width="490" height="360">
   </a>
 </p>
 
