@@ -1,8 +1,6 @@
 # sudoku
 Project for Sudoku solver/validator/generator
 
-![](https://github.com/jordantiu/sudoku/blob/master/images/input.gif)
-
 
 https://trello.com/b/8zKqdjLd/sudoku-board-project
 
@@ -10,7 +8,7 @@ https://trello.com/b/8zKqdjLd/sudoku-board-project
 <br />
 <p align="center">
   <a href="https://github.com/jordantiu/sudoku">
-    <img src="images/input.gif" alt="Logo" width="980" height="720">
+    <img src="images/input.gif" alt="Logo" width="490" height="360">
   </a>
 
   <h3 align="center">YOUR_TITLE</h3>
