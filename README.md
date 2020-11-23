@@ -14,7 +14,7 @@
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
-* [Game Features](#game-features).
+* [Game Features](#game-features)
   * [Menu](#menu)
   * [Input Numbers](#input-numbers)
   * [Movement](#movement)
