@@ -10,36 +10,44 @@
 <br />
 
 <!-- TABLE OF CONTENTS -->
-## Table of Contents
+# Table of Contents
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Game Features](#game-features)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+# About The Project
 
-### Built With
+TODO: Insert summary of what the project does
+
+## Built With
 
 * [Pygame](https://www.pygame.org/)
 
 
 <!-- GAME FEATURES -->
-## Game Features
+# Game Features
 
-![](https://github.com/jordantiu/sudoku/blob/master/images/menu.gif)
+## Menu
+![me](https://github.com/jordantiu/sudoku/blob/master/images/menu.gif)
 
-![](https://github.com/jordantiu/sudoku/blob/master/images/input.gif)
+## Input Numbers
+![me](https://github.com/jordantiu/sudoku/blob/master/images/input.gif)
 
-![](https://github.com/jordantiu/sudoku/blob/master/images/movement.gif)
+## Movement
+![me](https://github.com/jordantiu/sudoku/blob/master/images/movement.gif)
 
-![](https://github.com/jordantiu/sudoku/blob/master/images/new_game.gif)
+## Generating New Puzzles
+![me](https://github.com/jordantiu/sudoku/blob/master/images/new_game.gif)
 
-![](https://github.com/jordantiu/sudoku/blob/master/images/notes.gif)
+## Notes Feature
+![me](https://github.com/jordantiu/sudoku/blob/master/images/notes.gif)
 
-![](https://github.com/jordantiu/sudoku/blob/master/images/auto_solver.gif)
+## Auto Solve Function
+![me](https://github.com/jordantiu/sudoku/blob/master/images/auto_solver.gif)
+
+
 
 
 
