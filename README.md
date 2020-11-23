@@ -14,7 +14,13 @@
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
-* [Game Features](#game-features)
+* [Game Features](#game-features).
+  * [Menu](#menu)
+  * [Input Numbers](#input-numbers)
+  * [Movement](#movement)
+  * [Generating New Puzzles](#generating-new-puzzles)
+  * [Notes Feature](#notes-feature)
+  * [Auto Solve Function](#auto-solve-function)
 
 <!-- ABOUT THE PROJECT -->
 # About The Project
