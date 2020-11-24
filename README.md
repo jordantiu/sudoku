@@ -61,7 +61,7 @@ The player can toggle the notes feature to leave a number note (1-9) within a cu
 ![me](https://github.com/jordantiu/sudoku/blob/master/images/notes.gif)
 
 ## Auto Solve Function
-
+Clicking the auto solve function initiates the backtracking algorithm to automatically solve the puzzle.
 
 ![me](https://github.com/jordantiu/sudoku/blob/master/images/auto_solver.gif)
 
