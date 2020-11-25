@@ -1,12 +1,5 @@
 import numpy as np
 
-# TODO: Pick Empty
-# TODO: Try all numbers
-# TODO: Find one that works
-# TODO: Repeat
-# TODO: Backtrack if you find an invalid solution
-
-
 puzzle = [
     [7, 8, 0, 4, 0, 0, 1, 2, 0],
     [6, 0, 0, 0, 7, 5, 0, 0, 9],
@@ -18,20 +11,6 @@ puzzle = [
     [1, 2, 0, 0, 0, 7, 4, 0, 0],
     [0, 4, 9, 2, 0, 6, 0, 0, 7],
 ]
-
-
-# puzzle = [
-#     [1, 0, 0, 0, 4, 9, 6, 0, 8],
-#     [0, 4, 0, 8, 0, 0, 2, 0, 5],
-#     [2, 9, 8, 7, 0, 0, 0, 0, 0],
-#     [8, 6, 0, 9, 0, 0, 0, 0, 0],
-#     [0, 5, 4, 0, 0, 0, 7, 2, 0],
-#     [0, 0, 0, 0, 0, 2, 0, 8, 4],
-#     [0, 0, 0, 0, 0, 7, 4, 5, 2],
-#     [4, 0, 3, 0, 0, 5, 0, 1, 0],
-#     [5, 0, 9, 4, 1, 0, 0, 0, 7]
-#
-# ]
 
 
 def check_valid(y, x, number, grid):
@@ -97,10 +76,6 @@ def solve(grid):
                         grid[y][x] = 0
 
                 return
-    # TODO: Fix to verify that there is more than only one unique solution
-    # Reference: https://www.youtube.com/watch?v=G_UYXzGuqvM&t=19s
+
     return grid
 
-# print(np.matrix(puzzle))
-# solve(puzzle)
-# print(np.matrix(puzzle))
