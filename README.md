@@ -46,7 +46,7 @@ Light blue higlighted position allows users to input a number in a any of the bo
 ![me](https://github.com/jordantiu/sudoku/blob/master/images/input.gif)
 
 ## Movement
-The player is a ble to move the current cursor position using the arrow keys. Alternatively, clicking on any square will change the cursor position as well.
+The player is able to move the current cursor position using the arrow keys. Alternatively, clicking on any square will change the cursor position as well.
 
 ![me](https://github.com/jordantiu/sudoku/blob/master/images/movement.gif)
 
